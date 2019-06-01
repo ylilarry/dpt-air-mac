@@ -7,21 +7,71 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		B2133148229BAD8F008B21AA /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = B2133147229BAD8F008B21AA /* AppDelegate.m */; };
+		B2133148229BAD8F008B21AA /* AppDelegate.mm in Sources */ = {isa = PBXBuildFile; fileRef = B2133147229BAD8F008B21AA /* AppDelegate.mm */; };
 		B213314A229BAD90008B21AA /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B2133149229BAD90008B21AA /* Assets.xcassets */; };
 		B213314D229BAD90008B21AA /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = B213314B229BAD90008B21AA /* MainMenu.xib */; };
 		B2133150229BAD90008B21AA /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = B213314F229BAD90008B21AA /* main.m */; };
+		B26224DF22A2BB1F00AE061C /* common.m in Sources */ = {isa = PBXBuildFile; fileRef = B26224DE22A2BB1F00AE061C /* common.m */; };
+		B27E3F0822A1DE3F0077194E /* IOBluetoothUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B27E3F0722A1DE3F0077194E /* IOBluetoothUI.framework */; };
+		B2B4DFFE229F2E65002B6E3E /* dptrp1.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B2B4DFFD229F2E65002B6E3E /* dptrp1.framework */; };
+		B2B4E000229F2EB0002B6E3E /* dptrp1.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = B2B4DFFD229F2E65002B6E3E /* dptrp1.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		B2B4E002229F38DB002B6E3E /* Settings.xib in Resources */ = {isa = PBXBuildFile; fileRef = B2B4E001229F38DB002B6E3E /* Settings.xib */; };
+		B2B4E005229F3DE7002B6E3E /* Settings.mm in Sources */ = {isa = PBXBuildFile; fileRef = B2B4E004229F3DE7002B6E3E /* Settings.mm */; };
+		B2B4E00A22A0A4A3002B6E3E /* IOBluetooth.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B2B4E00622A0A476002B6E3E /* IOBluetooth.framework */; };
+		B2B4E00C22A0CC5B002B6E3E /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B2B4E00B22A0CC5A002B6E3E /* SystemConfiguration.framework */; };
 /* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		B262250422A2C5B300AE061C /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = B262250022A2C5B200AE061C /* Dpt Air Bluetooth Helper.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = B26224EB22A2C5B100AE061C;
+			remoteInfo = "Dpt Air Bluetooth Helper";
+		};
+		B262250722A2C93300AE061C /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = B262250022A2C5B200AE061C /* Dpt Air Bluetooth Helper.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = B26224EA22A2C5B100AE061C;
+			remoteInfo = "Dpt Air Bluetooth Helper";
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		B2B4DFF4229F2788002B6E3E /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				B2B4E000229F2EB0002B6E3E /* dptrp1.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		B2133143229BAD8F008B21AA /* Dpt Air.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Dpt Air.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		B2133146229BAD8F008B21AA /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
-		B2133147229BAD8F008B21AA /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		B2133147229BAD8F008B21AA /* AppDelegate.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = AppDelegate.mm; sourceTree = "<group>"; };
 		B2133149229BAD90008B21AA /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		B213314C229BAD90008B21AA /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/MainMenu.xib; sourceTree = "<group>"; };
 		B213314E229BAD90008B21AA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		B213314F229BAD90008B21AA /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		B2133151229BAD90008B21AA /* Dpt_Air.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Dpt_Air.entitlements; sourceTree = "<group>"; };
+		B26224DD22A2BA8F00AE061C /* common.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = common.h; sourceTree = "<group>"; };
+		B26224DE22A2BB1F00AE061C /* common.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = common.m; sourceTree = "<group>"; };
+		B262250022A2C5B200AE061C /* Dpt Air Bluetooth Helper.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = "Dpt Air Bluetooth Helper.xcodeproj"; path = "Dpt Air Bluetooth Helper/Dpt Air Bluetooth Helper.xcodeproj"; sourceTree = "<group>"; };
+		B27E3F0722A1DE3F0077194E /* IOBluetoothUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = IOBluetoothUI.framework; path = System/Library/Frameworks/IOBluetoothUI.framework; sourceTree = SDKROOT; };
+		B27E3F0D22A206CE0077194E /* Dpt Air.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "Dpt Air.entitlements"; sourceTree = "<group>"; };
+		B2B4DFFD229F2E65002B6E3E /* dptrp1.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = dptrp1.framework; sourceTree = "<group>"; };
+		B2B4E001229F38DB002B6E3E /* Settings.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = Settings.xib; sourceTree = "<group>"; };
+		B2B4E003229F3DE7002B6E3E /* Settings.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Settings.h; sourceTree = "<group>"; };
+		B2B4E004229F3DE7002B6E3E /* Settings.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = Settings.mm; sourceTree = "<group>"; };
+		B2B4E00622A0A476002B6E3E /* IOBluetooth.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = IOBluetooth.framework; path = System/Library/Frameworks/IOBluetooth.framework; sourceTree = SDKROOT; };
+		B2B4E00B22A0CC5A002B6E3E /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -29,6 +79,10 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B27E3F0822A1DE3F0077194E /* IOBluetoothUI.framework in Frameworks */,
+				B2B4E00C22A0CC5B002B6E3E /* SystemConfiguration.framework in Frameworks */,
+				B2B4E00A22A0A4A3002B6E3E /* IOBluetooth.framework in Frameworks */,
+				B2B4DFFE229F2E65002B6E3E /* dptrp1.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -38,8 +92,10 @@
 		B213313A229BAD8F008B21AA = {
 			isa = PBXGroup;
 			children = (
+				B262250022A2C5B200AE061C /* Dpt Air Bluetooth Helper.xcodeproj */,
 				B2133145229BAD8F008B21AA /* Dpt Air */,
 				B2133144229BAD8F008B21AA /* Products */,
+				B2B4DFC5229F1F9A002B6E3E /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -54,15 +110,40 @@
 		B2133145229BAD8F008B21AA /* Dpt Air */ = {
 			isa = PBXGroup;
 			children = (
-				B2133146229BAD8F008B21AA /* AppDelegate.h */,
-				B2133147229BAD8F008B21AA /* AppDelegate.m */,
-				B2133149229BAD90008B21AA /* Assets.xcassets */,
+				B27E3F0D22A206CE0077194E /* Dpt Air.entitlements */,
+				B26224DD22A2BA8F00AE061C /* common.h */,
+				B26224DE22A2BB1F00AE061C /* common.m */,
 				B213314B229BAD90008B21AA /* MainMenu.xib */,
+				B2133146229BAD8F008B21AA /* AppDelegate.h */,
+				B2133147229BAD8F008B21AA /* AppDelegate.mm */,
+				B2133149229BAD90008B21AA /* Assets.xcassets */,
 				B213314E229BAD90008B21AA /* Info.plist */,
 				B213314F229BAD90008B21AA /* main.m */,
 				B2133151229BAD90008B21AA /* Dpt_Air.entitlements */,
+				B2B4E001229F38DB002B6E3E /* Settings.xib */,
+				B2B4E003229F3DE7002B6E3E /* Settings.h */,
+				B2B4E004229F3DE7002B6E3E /* Settings.mm */,
 			);
 			path = "Dpt Air";
+			sourceTree = "<group>";
+		};
+		B262250122A2C5B200AE061C /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				B262250522A2C5B300AE061C /* Dpt Air Bluetooth Helper.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		B2B4DFC5229F1F9A002B6E3E /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				B27E3F0722A1DE3F0077194E /* IOBluetoothUI.framework */,
+				B2B4E00B22A0CC5A002B6E3E /* SystemConfiguration.framework */,
+				B2B4E00622A0A476002B6E3E /* IOBluetooth.framework */,
+				B2B4DFFD229F2E65002B6E3E /* dptrp1.framework */,
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -75,10 +156,12 @@
 				B213313F229BAD8F008B21AA /* Sources */,
 				B2133140229BAD8F008B21AA /* Frameworks */,
 				B2133141229BAD8F008B21AA /* Resources */,
+				B2B4DFF4229F2788002B6E3E /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				B262250822A2C93300AE061C /* PBXTargetDependency */,
 			);
 			name = "Dpt Air";
 			productName = "Dpt Air";
@@ -96,6 +179,17 @@
 				TargetAttributes = {
 					B2133142229BAD8F008B21AA = {
 						CreatedOnToolsVersion = 10.2.1;
+						SystemCapabilities = {
+							com.apple.ApplicationGroups.Mac = {
+								enabled = 1;
+							};
+							com.apple.HardenedRuntime = {
+								enabled = 0;
+							};
+							com.apple.Sandbox = {
+								enabled = 1;
+							};
+						};
 					};
 				};
 			};
@@ -110,6 +204,12 @@
 			mainGroup = B213313A229BAD8F008B21AA;
 			productRefGroup = B2133144229BAD8F008B21AA /* Products */;
 			projectDirPath = "";
+			projectReferences = (
+				{
+					ProductGroup = B262250122A2C5B200AE061C /* Products */;
+					ProjectRef = B262250022A2C5B200AE061C /* Dpt Air Bluetooth Helper.xcodeproj */;
+				},
+			);
 			projectRoot = "";
 			targets = (
 				B2133142229BAD8F008B21AA /* Dpt Air */,
@@ -117,12 +217,23 @@
 		};
 /* End PBXProject section */
 
+/* Begin PBXReferenceProxy section */
+		B262250522A2C5B300AE061C /* Dpt Air Bluetooth Helper.app */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.application;
+			path = "Dpt Air Bluetooth Helper.app";
+			remoteRef = B262250422A2C5B300AE061C /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+/* End PBXReferenceProxy section */
+
 /* Begin PBXResourcesBuildPhase section */
 		B2133141229BAD8F008B21AA /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 				B213314A229BAD90008B21AA /* Assets.xcassets in Resources */,
+				B2B4E002229F38DB002B6E3E /* Settings.xib in Resources */,
 				B213314D229BAD90008B21AA /* MainMenu.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -134,12 +245,22 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B26224DF22A2BB1F00AE061C /* common.m in Sources */,
 				B2133150229BAD90008B21AA /* main.m in Sources */,
-				B2133148229BAD8F008B21AA /* AppDelegate.m in Sources */,
+				B2133148229BAD8F008B21AA /* AppDelegate.mm in Sources */,
+				B2B4E005229F3DE7002B6E3E /* Settings.mm in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		B262250822A2C93300AE061C /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = "Dpt Air Bluetooth Helper";
+			targetProxy = B262250722A2C93300AE061C /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		B213314B229BAD90008B21AA /* MainMenu.xib */ = {
@@ -268,16 +389,22 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_ENTITLEMENTS = "Dpt Air/Dpt_Air.entitlements";
+				CODE_SIGN_ENTITLEMENTS = "Dpt Air/Dpt Air.entitlements";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				DEVELOPMENT_TEAM = JAL3299Z9M;
+				FRAMEWORK_SEARCH_PATHS = "$(PROJECT_DIR)";
+				HEADER_SEARCH_PATHS = (
+					"$(PROJECT_DIR)/dptrp1.framework/Headers",
+					/usr/local/Cellar/boost/1.69.0_2/include/,
+				);
 				INFOPLIST_FILE = "Dpt Air/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/../Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "com.dptair.Dpt-Air";
+				OTHER_CODE_SIGN_FLAGS = "--deep";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.dpt-air.Dpt-Air";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Debug;
@@ -286,16 +413,22 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_ENTITLEMENTS = "Dpt Air/Dpt_Air.entitlements";
+				CODE_SIGN_ENTITLEMENTS = "Dpt Air/Dpt Air.entitlements";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				DEVELOPMENT_TEAM = JAL3299Z9M;
+				FRAMEWORK_SEARCH_PATHS = "$(PROJECT_DIR)";
+				HEADER_SEARCH_PATHS = (
+					"$(PROJECT_DIR)/dptrp1.framework/Headers",
+					/usr/local/Cellar/boost/1.69.0_2/include/,
+				);
 				INFOPLIST_FILE = "Dpt Air/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/../Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "com.dptair.Dpt-Air";
+				OTHER_CODE_SIGN_FLAGS = "--deep";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.dpt-air.Dpt-Air";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Release;
