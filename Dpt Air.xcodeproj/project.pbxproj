@@ -7,14 +7,19 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		B2040A8A22A59C0B00132927 /* libboost_filesystem.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B2040A8922A59C0B00132927 /* libboost_filesystem.a */; };
+		B2040A8C22A59C7700132927 /* libsqlite3.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B2040A8B22A59C7600132927 /* libsqlite3.a */; };
+		B2040A8E22A59CA200132927 /* libssl.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B2040A8D22A59CA200132927 /* libssl.a */; };
+		B2040A9022A59CAE00132927 /* libcrypto.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B2040A8F22A59CAE00132927 /* libcrypto.a */; };
+		B2040A9222A59CBE00132927 /* libNFHTTP.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B2040A9122A59CBE00132927 /* libNFHTTP.a */; };
+		B2040A9322A59CD600132927 /* dptrp1.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B2B4DFFD229F2E65002B6E3E /* dptrp1.framework */; };
+		B2040A9622A59E6500132927 /* git in Resources */ = {isa = PBXBuildFile; fileRef = B2040A9522A59E4B00132927 /* git */; };
 		B2133148229BAD8F008B21AA /* AppDelegate.mm in Sources */ = {isa = PBXBuildFile; fileRef = B2133147229BAD8F008B21AA /* AppDelegate.mm */; };
 		B213314A229BAD90008B21AA /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B2133149229BAD90008B21AA /* Assets.xcassets */; };
 		B213314D229BAD90008B21AA /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = B213314B229BAD90008B21AA /* MainMenu.xib */; };
 		B2133150229BAD90008B21AA /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = B213314F229BAD90008B21AA /* main.m */; };
 		B26224DF22A2BB1F00AE061C /* common.m in Sources */ = {isa = PBXBuildFile; fileRef = B26224DE22A2BB1F00AE061C /* common.m */; };
 		B27E3F0822A1DE3F0077194E /* IOBluetoothUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B27E3F0722A1DE3F0077194E /* IOBluetoothUI.framework */; };
-		B2B4DFFE229F2E65002B6E3E /* dptrp1.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B2B4DFFD229F2E65002B6E3E /* dptrp1.framework */; };
-		B2B4E000229F2EB0002B6E3E /* dptrp1.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = B2B4DFFD229F2E65002B6E3E /* dptrp1.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		B2B4E002229F38DB002B6E3E /* Settings.xib in Resources */ = {isa = PBXBuildFile; fileRef = B2B4E001229F38DB002B6E3E /* Settings.xib */; };
 		B2B4E005229F3DE7002B6E3E /* Settings.mm in Sources */ = {isa = PBXBuildFile; fileRef = B2B4E004229F3DE7002B6E3E /* Settings.mm */; };
 		B2B4E00A22A0A4A3002B6E3E /* IOBluetooth.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B2B4E00622A0A476002B6E3E /* IOBluetooth.framework */; };
@@ -38,21 +43,13 @@
 		};
 /* End PBXContainerItemProxy section */
 
-/* Begin PBXCopyFilesBuildPhase section */
-		B2B4DFF4229F2788002B6E3E /* Embed Frameworks */ = {
-			isa = PBXCopyFilesBuildPhase;
-			buildActionMask = 2147483647;
-			dstPath = "";
-			dstSubfolderSpec = 10;
-			files = (
-				B2B4E000229F2EB0002B6E3E /* dptrp1.framework in Embed Frameworks */,
-			);
-			name = "Embed Frameworks";
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-/* End PBXCopyFilesBuildPhase section */
-
 /* Begin PBXFileReference section */
+		B2040A8922A59C0B00132927 /* libboost_filesystem.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libboost_filesystem.a; path = ../../../../usr/local/Cellar/boost/1.69.0_2/lib/libboost_filesystem.a; sourceTree = "<group>"; };
+		B2040A8B22A59C7600132927 /* libsqlite3.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libsqlite3.a; path = ../../../../usr/local/Cellar/sqlite/3.28.0/lib/libsqlite3.a; sourceTree = "<group>"; };
+		B2040A8D22A59CA200132927 /* libssl.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libssl.a; path = ../../../../usr/local/Cellar/openssl/1.0.2r/lib/libssl.a; sourceTree = "<group>"; };
+		B2040A8F22A59CAE00132927 /* libcrypto.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libcrypto.a; path = ../../../../usr/local/Cellar/openssl/1.0.2r/lib/libcrypto.a; sourceTree = "<group>"; };
+		B2040A9122A59CBE00132927 /* libNFHTTP.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libNFHTTP.a; sourceTree = "<group>"; };
+		B2040A9522A59E4B00132927 /* git */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.executable"; path = git; sourceTree = "<group>"; };
 		B2133143229BAD8F008B21AA /* Dpt Air.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Dpt Air.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		B2133146229BAD8F008B21AA /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		B2133147229BAD8F008B21AA /* AppDelegate.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = AppDelegate.mm; sourceTree = "<group>"; };
@@ -79,10 +76,15 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B2040A9322A59CD600132927 /* dptrp1.framework in Frameworks */,
+				B2040A9222A59CBE00132927 /* libNFHTTP.a in Frameworks */,
+				B2040A9022A59CAE00132927 /* libcrypto.a in Frameworks */,
+				B2040A8E22A59CA200132927 /* libssl.a in Frameworks */,
+				B2040A8C22A59C7700132927 /* libsqlite3.a in Frameworks */,
+				B2040A8A22A59C0B00132927 /* libboost_filesystem.a in Frameworks */,
 				B27E3F0822A1DE3F0077194E /* IOBluetoothUI.framework in Frameworks */,
 				B2B4E00C22A0CC5B002B6E3E /* SystemConfiguration.framework in Frameworks */,
 				B2B4E00A22A0A4A3002B6E3E /* IOBluetooth.framework in Frameworks */,
-				B2B4DFFE229F2E65002B6E3E /* dptrp1.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -92,6 +94,7 @@
 		B213313A229BAD8F008B21AA = {
 			isa = PBXGroup;
 			children = (
+				B2040A9522A59E4B00132927 /* git */,
 				B262250022A2C5B200AE061C /* Dpt Air Bluetooth Helper.xcodeproj */,
 				B2133145229BAD8F008B21AA /* Dpt Air */,
 				B2133144229BAD8F008B21AA /* Products */,
@@ -138,6 +141,11 @@
 		B2B4DFC5229F1F9A002B6E3E /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				B2040A9122A59CBE00132927 /* libNFHTTP.a */,
+				B2040A8F22A59CAE00132927 /* libcrypto.a */,
+				B2040A8D22A59CA200132927 /* libssl.a */,
+				B2040A8B22A59C7600132927 /* libsqlite3.a */,
+				B2040A8922A59C0B00132927 /* libboost_filesystem.a */,
 				B27E3F0722A1DE3F0077194E /* IOBluetoothUI.framework */,
 				B2B4E00B22A0CC5A002B6E3E /* SystemConfiguration.framework */,
 				B2B4E00622A0A476002B6E3E /* IOBluetooth.framework */,
@@ -156,7 +164,6 @@
 				B213313F229BAD8F008B21AA /* Sources */,
 				B2133140229BAD8F008B21AA /* Frameworks */,
 				B2133141229BAD8F008B21AA /* Resources */,
-				B2B4DFF4229F2788002B6E3E /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
@@ -232,6 +239,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B2040A9622A59E6500132927 /* git in Resources */,
 				B213314A229BAD90008B21AA /* Assets.xcassets in Resources */,
 				B2B4E002229F38DB002B6E3E /* Settings.xib in Resources */,
 				B213314D229BAD90008B21AA /* MainMenu.xib in Resources */,
@@ -403,6 +411,13 @@
 					"$(inherited)",
 					"@executable_path/../Frameworks",
 				);
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					/usr/local/Cellar/boost/1.69.0_2/lib,
+					/usr/local/Cellar/sqlite/3.28.0/lib,
+					/usr/local/Cellar/openssl/1.0.2r/lib,
+					"$(PROJECT_DIR)",
+				);
 				OTHER_CODE_SIGN_FLAGS = "--deep";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.dpt-air.Dpt-Air";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -426,6 +441,13 @@
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/../Frameworks",
+				);
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					/usr/local/Cellar/boost/1.69.0_2/lib,
+					/usr/local/Cellar/sqlite/3.28.0/lib,
+					/usr/local/Cellar/openssl/1.0.2r/lib,
+					"$(PROJECT_DIR)",
 				);
 				OTHER_CODE_SIGN_FLAGS = "--deep";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.dpt-air.Dpt-Air";

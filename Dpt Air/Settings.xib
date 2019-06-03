@@ -17,17 +17,17 @@
         <window title="Preference" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" releasedWhenClosed="NO" frameAutosaveName="" animationBehavior="default" id="oeh-vm-ntF">
             <windowStyleMask key="styleMask" titled="YES" closable="YES" resizable="YES"/>
             <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
-            <rect key="contentRect" x="453" y="329" width="490" height="397"/>
+            <rect key="contentRect" x="453" y="329" width="561" height="397"/>
             <rect key="screenRect" x="0.0" y="0.0" width="1440" height="877"/>
             <view key="contentView" id="qFg-1G-Fi8">
-                <rect key="frame" x="0.0" y="0.0" width="490" height="397"/>
+                <rect key="frame" x="0.0" y="0.0" width="561" height="397"/>
                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                 <subviews>
                     <tabView translatesAutoresizingMaskIntoConstraints="NO" id="LI3-hS-GdD" userLabel="Tab View">
-                        <rect key="frame" x="8" y="5" width="474" height="388"/>
+                        <rect key="frame" x="8" y="5" width="622" height="388"/>
                         <font key="font" metaFont="system"/>
                         <tabViewItems>
-                            <tabViewItem label="Paths" identifier="" id="305-zR-9mg">
+                            <tabViewItem label="Paths" identifier="" id="305-zR-9mg" propertyAccessControl="all">
                                 <view key="view" id="tI2-Aa-aF4">
                                     <rect key="frame" x="10" y="33" width="454" height="342"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -293,7 +293,147 @@
                                     </constraints>
                                 </view>
                             </tabViewItem>
-                            <tabViewItem label="Bluetooth" identifier="" id="FRs-Vq-NSI">
+                            <tabViewItem label="Sync" identifier="" id="JFp-vU-9w2">
+                                <view key="view" id="1sV-vM-Xqs">
+                                    <rect key="frame" x="10" y="33" width="602" height="342"/>
+                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                    <subviews>
+                                        <stackView distribution="fill" orientation="vertical" alignment="leading" spacing="20" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="YpQ-56-tRO">
+                                            <rect key="frame" x="30" y="140" width="542" height="172"/>
+                                            <subviews>
+                                                <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Ybt-k6-s74">
+                                                    <rect key="frame" x="-2" y="156" width="362" height="18"/>
+                                                    <buttonCell key="cell" type="check" title="Improve file transfer speed by storing compressed PDFs" bezelStyle="regularSquare" imagePosition="left" inset="2" id="k4m-lv-OwI">
+                                                        <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
+                                                        <font key="font" metaFont="system"/>
+                                                    </buttonCell>
+                                                    <connections>
+                                                        <binding destination="fAW-lb-BiS" name="value" keyPath="values.enable_pdf_compression" id="EHk-fC-HFI"/>
+                                                    </connections>
+                                                </button>
+                                                <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="WGI-1u-fhQ">
+                                                    <rect key="frame" x="-2" y="122" width="314" height="18"/>
+                                                    <buttonCell key="cell" type="check" title="Detect local file changes and sync automatically" bezelStyle="regularSquare" imagePosition="left" inset="2" id="QQr-bQ-MfM">
+                                                        <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
+                                                        <font key="font" metaFont="system"/>
+                                                    </buttonCell>
+                                                    <connections>
+                                                        <binding destination="fAW-lb-BiS" name="value" keyPath="values.enable_sync_on_change" id="hrt-HH-bWN"/>
+                                                    </connections>
+                                                </button>
+                                                <stackView distribution="fill" orientation="horizontal" alignment="centerY" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Z0k-jI-suk">
+                                                    <rect key="frame" x="0.0" y="82" width="279" height="22"/>
+                                                    <subviews>
+                                                        <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Efv-T6-S3R">
+                                                            <rect key="frame" x="-2" y="2" width="168" height="18"/>
+                                                            <buttonCell key="cell" type="check" title="Schedule sync for every" bezelStyle="regularSquare" imagePosition="left" inset="2" id="wa2-oI-y4j">
+                                                                <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
+                                                                <font key="font" metaFont="system"/>
+                                                            </buttonCell>
+                                                            <connections>
+                                                                <binding destination="fAW-lb-BiS" name="value" keyPath="values.enable_scheduled_sync" id="NaE-Bc-wxr"/>
+                                                            </connections>
+                                                        </button>
+                                                        <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="dKO-q5-F4T">
+                                                            <rect key="frame" x="172" y="0.0" width="50" height="22"/>
+                                                            <constraints>
+                                                                <constraint firstAttribute="width" constant="50" id="X9Z-uJ-qKn"/>
+                                                            </constraints>
+                                                            <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" drawsBackground="YES" id="O9e-cx-mSh">
+                                                                <numberFormatter key="formatter" formatterBehavior="default10_4" numberStyle="decimal" minimumIntegerDigits="1" maximumIntegerDigits="2000000000" maximumFractionDigits="3" id="ZUc-n5-rhu"/>
+                                                                <font key="font" metaFont="system"/>
+                                                                <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
+                                                                <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                                            </textFieldCell>
+                                                            <connections>
+                                                                <binding destination="fAW-lb-BiS" name="enabled" keyPath="values.enable_scheduled_sync" id="zlM-gb-z5Z"/>
+                                                                <binding destination="fAW-lb-BiS" name="value" keyPath="values.scheduled_sync_interval" id="LdJ-Ab-aej">
+                                                                    <dictionary key="options">
+                                                                        <string key="NSValueTransformerName">NSIsNotNil</string>
+                                                                    </dictionary>
+                                                                </binding>
+                                                            </connections>
+                                                        </textField>
+                                                        <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="lvG-6j-yqi">
+                                                            <rect key="frame" x="228" y="3" width="53" height="17"/>
+                                                            <textFieldCell key="cell" lineBreakMode="clipping" title="minutes" id="IdD-Pr-hf9">
+                                                                <font key="font" metaFont="system"/>
+                                                                <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                                                <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                                            </textFieldCell>
+                                                        </textField>
+                                                    </subviews>
+                                                    <visibilityPriorities>
+                                                        <integer value="1000"/>
+                                                        <integer value="1000"/>
+                                                        <integer value="1000"/>
+                                                    </visibilityPriorities>
+                                                    <customSpacing>
+                                                        <real value="3.4028234663852886e+38"/>
+                                                        <real value="3.4028234663852886e+38"/>
+                                                        <real value="3.4028234663852886e+38"/>
+                                                    </customSpacing>
+                                                </stackView>
+                                                <box verticalHuggingPriority="750" boxType="separator" translatesAutoresizingMaskIntoConstraints="NO" id="mX5-q7-9Dq">
+                                                    <rect key="frame" x="0.0" y="59" width="542" height="5"/>
+                                                </box>
+                                                <stackView distribution="fill" orientation="vertical" alignment="leading" spacing="10" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="xeD-O3-CL9">
+                                                    <rect key="frame" x="0.0" y="0.0" width="454" height="41"/>
+                                                    <subviews>
+                                                        <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="a2S-nY-xSu">
+                                                            <rect key="frame" x="-2" y="25" width="307" height="18"/>
+                                                            <buttonCell key="cell" type="check" title="Add &quot;Send to DPT-RP1&quot; to Finder's share menu" bezelStyle="regularSquare" imagePosition="left" enabled="NO" state="on" inset="2" id="8AY-4e-Z2O">
+                                                                <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
+                                                                <font key="font" metaFont="system"/>
+                                                            </buttonCell>
+                                                        </button>
+                                                        <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="api-RV-8cR">
+                                                            <rect key="frame" x="-2" y="0.0" width="458" height="17"/>
+                                                            <textFieldCell key="cell" lineBreakMode="clipping" enabled="NO" title="Note: It needs to be manually enabled in Finder's &quot;Share&quot; &gt; &quot;More...&quot; menu." id="8bl-2c-jAq">
+                                                                <font key="font" metaFont="system"/>
+                                                                <color key="textColor" name="disabledControlTextColor" catalog="System" colorSpace="catalog"/>
+                                                                <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                                            </textFieldCell>
+                                                        </textField>
+                                                    </subviews>
+                                                    <visibilityPriorities>
+                                                        <integer value="1000"/>
+                                                        <integer value="1000"/>
+                                                    </visibilityPriorities>
+                                                    <customSpacing>
+                                                        <real value="3.4028234663852886e+38"/>
+                                                        <real value="3.4028234663852886e+38"/>
+                                                    </customSpacing>
+                                                </stackView>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="mX5-q7-9Dq" firstAttribute="leading" secondItem="YpQ-56-tRO" secondAttribute="leading" id="V05-uY-ZKa"/>
+                                                <constraint firstAttribute="trailing" secondItem="mX5-q7-9Dq" secondAttribute="trailing" id="tXb-3m-06R"/>
+                                            </constraints>
+                                            <visibilityPriorities>
+                                                <integer value="1000"/>
+                                                <integer value="1000"/>
+                                                <integer value="1000"/>
+                                                <integer value="1000"/>
+                                                <integer value="1000"/>
+                                            </visibilityPriorities>
+                                            <customSpacing>
+                                                <real value="3.4028234663852886e+38"/>
+                                                <real value="3.4028234663852886e+38"/>
+                                                <real value="3.4028234663852886e+38"/>
+                                                <real value="3.4028234663852886e+38"/>
+                                                <real value="3.4028234663852886e+38"/>
+                                            </customSpacing>
+                                        </stackView>
+                                    </subviews>
+                                    <constraints>
+                                        <constraint firstItem="YpQ-56-tRO" firstAttribute="leading" secondItem="1sV-vM-Xqs" secondAttribute="leading" constant="30" id="2t3-CB-EA0"/>
+                                        <constraint firstItem="YpQ-56-tRO" firstAttribute="top" secondItem="1sV-vM-Xqs" secondAttribute="top" constant="30" id="tBs-dg-LGz"/>
+                                        <constraint firstAttribute="trailing" secondItem="YpQ-56-tRO" secondAttribute="trailing" constant="30" id="z7S-N6-Yl3"/>
+                                    </constraints>
+                                </view>
+                            </tabViewItem>
+                            <tabViewItem label="Bluetooth" identifier="" id="FRs-Vq-NSI" propertyAccessControl="all">
                                 <view key="view" id="kVT-pe-1sW">
                                     <rect key="frame" x="10" y="33" width="454" height="342"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -302,7 +442,7 @@
                                             <rect key="frame" x="0.0" y="0.0" width="454" height="292"/>
                                             <clipView key="contentView" id="yZF-O8-86N">
                                                 <rect key="frame" x="0.0" y="0.0" width="454" height="292"/>
-                                                <autoresizingMask key="autoresizingMask"/>
+                                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                 <subviews>
                                                     <tableView verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="firstColumnOnly" alternatingRowBackgroundColors="YES" columnResizing="NO" multipleSelection="NO" autosaveColumns="NO" typeSelect="NO" rowHeight="50" headerView="Oba-Wi-oTb" viewBased="YES" id="eum-h9-QzZ">
                                                         <rect key="frame" x="0.0" y="0.0" width="454" height="267"/>
@@ -439,7 +579,7 @@
                             </tabViewItem>
                             <tabViewItem label="Rollback" identifier="" id="vZR-xm-dSR">
                                 <view key="view" id="TMt-8d-gIj">
-                                    <rect key="frame" x="10" y="33" width="471" height="342"/>
+                                    <rect key="frame" x="10" y="33" width="454" height="342"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 </view>
                             </tabViewItem>
@@ -453,7 +593,7 @@
                     <constraint firstItem="LI3-hS-GdD" firstAttribute="leading" secondItem="qFg-1G-Fi8" secondAttribute="leading" constant="15" id="m7K-qM-rGu"/>
                 </constraints>
             </view>
-            <point key="canvasLocation" x="184" y="146.5"/>
+            <point key="canvasLocation" x="34.5" y="146.5"/>
         </window>
         <userDefaultsController representsSharedInstance="YES" id="fAW-lb-BiS"/>
         <arrayController id="hJV-wj-fQ6"/>

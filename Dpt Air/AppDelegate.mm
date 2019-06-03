@@ -21,13 +21,17 @@
     // Insert code here to initialize your application
     using namespace std;
     using namespace dpt;
+    self.shared_app_dir = [[NSFileManager defaultManager] containerURLForSecurityApplicationGroupIdentifier:@"group.com.dpt-air"];
     self.m_dpt = make_shared<Dpt>();
-    self.m_dpt->setMessager([=](string msg) {
+    NSURL* log_file_path = [self.shared_app_dir URLByAppendingPathComponent:@"dpt-air.log"];
+    self.log_file = make_shared<std::ofstream>(std::string(log_file_path.path.UTF8String), std::ios_base::out);
+    self.m_dpt->setLogger(*self.log_file);
+    self.m_dpt->setMessager([=](string const& msg) {
         [self performSelectorOnMainThread:@selector(setMessage:) withObject:[NSString stringWithUTF8String:msg.c_str()] waitUntilDone:YES];
     });
     self.dpt_authenticated = NO;
     self.statusItem = [NSStatusBar.systemStatusBar statusItemWithLength:NSSquareStatusItemLength];
-    self.statusItem.button.title = @"DA";
+    self.statusItem.button.title = @"DP";
     self.statusItem.menu = self.statusItemMenu;
     [self autoDetectSettings];
     [NSUserDefaultsController.sharedUserDefaultsController.values
@@ -51,15 +55,16 @@
 
 - (void)authenticateDPT
 {
-    if (self.dpt_authenticated) { return; }
     NSURL* sync_dir = [NSUserDefaults.standardUserDefaults URLForKey:@"sync_dir"];
     NSURL* private_key = [NSUserDefaults.standardUserDefaults URLForKey:@"private_key"];
     NSURL* device_id = [NSUserDefaults.standardUserDefaults URLForKey:@"device_id"];
     self.m_dpt->setClientIdPath(std::string(device_id.path.UTF8String));
     self.m_dpt->setPrivateKeyPath(std::string(private_key.path.UTF8String));
     self.m_dpt->setSyncDir(std::string(sync_dir.path.UTF8String));
+    NSString* gitpath = [NSBundle.mainBundle pathForResource:@"git" ofType:nil];
+    self.m_dpt->setGitPath(std::string(gitpath.UTF8String));
+    self.m_dpt->setupSyncDir();
     self.m_dpt->authenticate();
-    self.dpt_authenticated = YES;
 }
 
 - (void)checkReady
@@ -107,8 +112,7 @@
     [devices enumerateObjectsUsingBlock:^(IOBluetoothDevice* obj, NSUInteger idx, BOOL * _Nonnull stop) {
         if ([bluetooth_device isEqualToString:obj.nameOrAddress]) {
             // found our device
-            NSLog(@"Pairing Bluetooth %@", obj.nameOrAddress);
-            self.message = @"Pairing Bluetooth...";
+            self.message = [NSString stringWithFormat:@"Pairing %@...", obj.nameOrAddress];
             if (! obj.isConnected) {
                 NSURL* tmp = [NSUserDefaults.standardUserDefaults URLForKey:@"sync_dir"];
                 [tmp withSecured:^(NSURL * _Nonnull sync_dir) {
@@ -121,7 +125,7 @@
                 }];
                 BOOL success = [NSWorkspace.sharedWorkspace
                                 launchAppWithBundleIdentifier:@"com.dpt-air.Dpt-Air-Bluetooth-Helper"
-                                options:NSWorkspaceLaunchAndHide|NSWorkspaceLaunchWithoutAddingToRecents
+                                options:NSWorkspaceLaunchWithoutAddingToRecents
                                 additionalEventParamDescriptor:nil
                                 launchIdentifier:nil];
                 assert(success);
@@ -194,6 +198,19 @@
         [NSUserDefaults.standardUserDefaults setURL:private_key_file forKey:@"private_key"];
         [NSUserDefaults.standardUserDefaults setURL:device_id_file forKey:@"device_id"];
     }
+}
+
+- (IBAction)terminateApp:(id)sender
+{
+    [NSApp terminate:sender];
+}
+
+- (IBAction)openSyncFolderInFinder:(id)sender
+{
+    NSURL* sync_dir = [NSUserDefaults.standardUserDefaults URLForKey:@"sync_dir"];
+    [sync_dir withSecured:^(NSURL * _Nonnull url) {
+        [[NSWorkspace sharedWorkspace] openURL: sync_dir];
+    }];
 }
 
 @end

@@ -8,6 +8,7 @@
 
 #import <Cocoa/Cocoa.h>
 #include <memory>
+#include <iostream>
 #import "Settings.h"
 
 
@@ -27,5 +28,6 @@ namespace dpt {
     @property BOOL dpt_busy;
     @property BOOL setup_ready;
     @property NSString* message;
-
+    @property std::shared_ptr<std::ofstream> log_file;
+    @property NSURL* shared_app_dir;
 @end

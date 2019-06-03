@@ -33,7 +33,7 @@
                     </connections>
                 </menuItem>
                 <menuItem isSeparatorItem="YES" id="B9J-oa-qcU"/>
-                <menuItem title="Setup Sync Folder..." id="d2u-JN-3qf">
+                <menuItem title="Choose Sync Folder..." id="d2u-JN-3qf">
                     <modifierMask key="keyEquivalentModifierMask"/>
                     <connections>
                         <action selector="displaySettingsWindow:" target="Voe-Tx-rLC" id="sXi-OJ-Wvl"/>
@@ -47,6 +47,11 @@
                 <menuItem title="Sync All" keyEquivalent="r" id="yBB-ep-bfc">
                     <connections>
                         <action selector="syncAll:" target="Voe-Tx-rLC" id="c3y-In-5Ck"/>
+                        <binding destination="Voe-Tx-rLC" name="enabled" keyPath="self.dpt_busy" id="hPF-0u-rSB">
+                            <dictionary key="options">
+                                <string key="NSValueTransformerName">NSNegateBoolean</string>
+                            </dictionary>
+                        </binding>
                         <binding destination="Voe-Tx-rLC" name="enabled2" keyPath="self.setup_ready" previousBinding="hPF-0u-rSB" id="lpx-Ci-WNx">
                             <dictionary key="options">
                                 <integer key="NSMultipleValuesPlaceholder" value="-1"/>
@@ -55,9 +60,14 @@
                                 <integer key="NSNullPlaceholder" value="-1"/>
                             </dictionary>
                         </binding>
-                        <binding destination="Voe-Tx-rLC" name="enabled" keyPath="self.dpt_busy" id="hPF-0u-rSB">
+                    </connections>
+                </menuItem>
+                <menuItem title="Open Sync Folder" keyEquivalent="o" id="Sb7-s5-JuZ">
+                    <connections>
+                        <action selector="openSyncFolderInFinder:" target="Voe-Tx-rLC" id="x9I-CR-fCU"/>
+                        <binding destination="OgF-Bh-RUc" name="enabled" keyPath="values.sync_dir" id="pfd-3r-Ooh">
                             <dictionary key="options">
-                                <string key="NSValueTransformerName">NSNegateBoolean</string>
+                                <string key="NSValueTransformerName">NSIsNotNil</string>
                             </dictionary>
                         </binding>
                     </connections>
@@ -65,6 +75,11 @@
                 <menuItem title="Launch Digital Paper App" keyEquivalent="l" id="Ift-St-rri">
                     <connections>
                         <action selector="launchDPA:" target="Voe-Tx-rLC" id="zTo-RL-0CV"/>
+                        <binding destination="OgF-Bh-RUc" name="hidden" keyPath="values.sony_dpa_launcher" previousBinding="f2Z-Zu-Z3J" id="6lw-P7-hYx">
+                            <dictionary key="options">
+                                <string key="NSValueTransformerName">NSIsNil</string>
+                            </dictionary>
+                        </binding>
                         <binding destination="OgF-Bh-RUc" name="enabled" keyPath="values.sony_dpa_launcher" id="f2Z-Zu-Z3J">
                             <dictionary key="options">
                                 <string key="NSValueTransformerName">NSIsNotNil</string>
@@ -76,6 +91,12 @@
                 <menuItem title="Preference..." keyEquivalent="," id="nFG-SZ-KwX">
                     <connections>
                         <action selector="displaySettingsWindow:" target="Voe-Tx-rLC" id="3p8-JM-Jtk"/>
+                    </connections>
+                </menuItem>
+                <menuItem isSeparatorItem="YES" id="FCQ-RK-5Nd"/>
+                <menuItem title="Quit Dpt Air" keyEquivalent="q" id="WFJ-IA-Bi3">
+                    <connections>
+                        <action selector="terminateApp:" target="Voe-Tx-rLC" id="fU0-VX-b65"/>
                     </connections>
                 </menuItem>
             </items>
