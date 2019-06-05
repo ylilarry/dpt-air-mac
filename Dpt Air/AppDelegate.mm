@@ -21,19 +21,66 @@
     // Insert code here to initialize your application
     using namespace std;
     using namespace dpt;
+    self.dpt_lock = [[NSLock alloc] init];
+    self.status_title = @"DP";
     self.shared_app_dir = [[NSFileManager defaultManager] containerURLForSecurityApplicationGroupIdentifier:@"group.com.dpt-air"];
     self.m_dpt = make_shared<Dpt>();
     NSURL* log_file_path = [self.shared_app_dir URLByAppendingPathComponent:@"dpt-air.log"];
     self.log_file = make_shared<std::ofstream>(std::string(log_file_path.path.UTF8String), std::ios_base::out);
     self.m_dpt->setLogger(*self.log_file);
     self.m_dpt->setMessager([=](string const& msg) {
-        [self performSelectorOnMainThread:@selector(setMessage:) withObject:[NSString stringWithUTF8String:msg.c_str()] waitUntilDone:YES];
+        [self performSelectorOnMainThread:@selector(setMessage:) withObject:[NSString stringWithUTF8String:msg.c_str()] waitUntilDone:NO];
     });
     self.dpt_authenticated = NO;
     self.statusItem = [NSStatusBar.systemStatusBar statusItemWithLength:NSSquareStatusItemLength];
     self.statusItem.button.title = @"DP";
     self.statusItem.menu = self.statusItemMenu;
     [self autoDetectSettings];
+    NSUserDefaults* shared_defaults = [[NSUserDefaults alloc] initWithSuiteName:@"group.com.dpt-air"];
+//    [NSUserDefaults.standardUserDefaults addSuiteNamed:@"group.com.dpt-air"];
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0), ^{
+        NSUserDefaults* shared_defaults = [[NSUserDefaults alloc] initWithSuiteName:@"group.com.dpt-air"];
+        while(true) {
+            NSArray<NSString*>* arr = [shared_defaults objectForKey:@"to_open"];
+            [arr enumerateObjectsUsingBlock:^(NSString * _Nonnull s, NSUInteger idx, BOOL * _Nonnull stop) {
+                NSURL* url = [NSURL URLWithString:s];
+                self.message = [NSString stringWithFormat:@"Sending %@ to DPT-RP1...", url.lastPathComponent];
+                [self.statusItem performSelectorOnMainThread:@selector(popUpStatusItemMenu:) withObject:self.statusItemMenu waitUntilDone:YES];
+                [self.dpt_lock lock];
+                [self startCheckingDptBusyStatus];
+                try {
+                    NSURL* sync_dir = [NSUserDefaults.standardUserDefaults URLForKey:@"sync_dir"];
+                    NSURL* private_key = [NSUserDefaults.standardUserDefaults URLForKey:@"private_key"];
+                    NSURL* device_id = [NSUserDefaults.standardUserDefaults URLForKey:@"device_id"];
+                    [sync_dir withSecured:^(NSURL * _Nonnull _) {
+                        [private_key withSecured:^(NSURL * _Nonnull _) {
+                            [device_id withSecured:^(NSURL * _Nonnull _) {
+                                [self authenticateDPT];
+                                self.m_dpt->dptQuickUploadAndOpen(std::string(url.path.UTF8String));
+                            }];
+                        }];
+                    }];
+                    NSURL* shared_dir = [[NSFileManager defaultManager] containerURLForSecurityApplicationGroupIdentifier:@"group.com.dpt-air"];
+                    NSURL* tmp_dir = [shared_dir URLByAppendingPathComponent:@"tmp" isDirectory:YES];
+                    [NSFileManager.defaultManager removeItemAtURL:tmp_dir error:nil];
+                } catch(...) {
+                    
+                }
+                [self.dpt_lock unlock];
+                NSLog(@"%@", url);
+            }];
+            [shared_defaults setObject:[NSArray array] forKey:@"to_open"];
+            [NSThread sleepForTimeInterval:1];
+        }
+    });
+//    [shared_defaults
+//         addObserver:self forKeyPath:@"to_open"
+//         options:NSKeyValueObservingOptionInitial|NSKeyValueObservingOptionNew
+//         context:nil];
+    [NSUserDefaults.standardUserDefaults
+         addObserver:self forKeyPath:@"enable_sync_on_change"
+         options:NSKeyValueObservingOptionInitial|NSKeyValueObservingOptionNew
+         context:nil];
     [NSUserDefaultsController.sharedUserDefaultsController.values
         addObserver:self forKeyPath:@"sync_dir"
         options:NSKeyValueObservingOptionInitial|NSKeyValueObservingOptionNew
@@ -77,9 +124,15 @@
 }
 
 - (void)observeValueForKeyPath:(NSString *)keyPath
-                      ofObject:(id)object change:(NSDictionary<NSKeyValueChangeKey,id> *)change
+                      ofObject:(id)object
+                        change:(NSDictionary<NSKeyValueChangeKey,id> *)change
                        context:(void *)context
 {
+//    if ([keyPath isEqualToString:@"to_open"]) {
+//        NSUserDefaults* shared_defaults = [[NSUserDefaults alloc] initWithSuiteName:@"group.com.dpt-air"];
+//        id val = [shared_defaults objectForKey:keyPath];
+//        NSLog(@"%@", val);
+//    }
     if ([keyPath isEqualToString:@"sync_dir"]
         || [keyPath isEqualToString:@"private_key"]
         || [keyPath isEqualToString:@"device_id"])
@@ -137,6 +190,32 @@
     return rtv;
 }
 
+- (void)startCheckingDptBusyStatus
+{
+    dispatch_async(dispatch_get_global_queue(QOS_CLASS_BACKGROUND, 0), ^{
+        int i = 0;
+        while(true) {
+            if ([self.dpt_lock tryLock]) {
+                // locked, not busy
+                [self.dpt_lock unlock];
+                self.dpt_busy = NO;
+                break;
+            }
+            self.dpt_busy = YES;
+            // failed to get lock, busy
+            NSString* new_title = self.status_title;
+            for (int j = 0; j < i; j++) {
+                new_title = [new_title stringByAppendingString:@"."];
+            }
+            [self.statusItem.button performSelectorOnMainThread:@selector(setTitle:) withObject:new_title waitUntilDone:YES];
+            i++;
+            i %= 3;
+            [NSThread sleepForTimeInterval:1];
+        }
+        [self.statusItem.button performSelectorOnMainThread:@selector(setTitle:) withObject:self.status_title waitUntilDone:YES];
+    });
+}
+
 - (IBAction)syncAll:(id)sender
 {
     /* attemp to connect to bluetooth */
@@ -147,8 +226,11 @@
         while (! device.isConnected) {
             [NSThread sleepForTimeInterval:0.5];
         }
-        if (self.dpt_busy) { return; }
-        self.dpt_busy = YES;
+        
+        [self.dpt_lock lock];
+
+        [self startCheckingDptBusyStatus];
+        
         try {
             NSURL* sync_dir = [NSUserDefaults.standardUserDefaults URLForKey:@"sync_dir"];
             NSURL* private_key = [NSUserDefaults.standardUserDefaults URLForKey:@"private_key"];
@@ -164,21 +246,7 @@
         } catch(...) {
             
         }
-        self.dpt_busy = NO;
-    });
-    NSString* original_title = self.statusItem.button.title;
-    dispatch_async(dispatch_get_global_queue(QOS_CLASS_BACKGROUND, 0), ^{
-        int i = 0;
-        while(self.dpt_busy) {
-            NSString* new_title = original_title;
-            for (int j = 0; j <= i; j++) {
-                new_title = [new_title stringByAppendingString:@"."];
-            }
-            [self.statusItem.button performSelectorOnMainThread:@selector(setTitle:) withObject:new_title waitUntilDone:YES];
-            i = (i + 1) % 3;
-            [NSThread sleepForTimeInterval:1];
-        }
-        [self.statusItem.button performSelectorOnMainThread:@selector(setTitle:) withObject:original_title waitUntilDone:YES];
+        [self.dpt_lock unlock];
     });
 }
 

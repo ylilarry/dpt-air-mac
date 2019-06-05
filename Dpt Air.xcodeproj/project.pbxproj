@@ -14,6 +14,12 @@
 		B2040A9222A59CBE00132927 /* libNFHTTP.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B2040A9122A59CBE00132927 /* libNFHTTP.a */; };
 		B2040A9322A59CD600132927 /* dptrp1.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B2B4DFFD229F2E65002B6E3E /* dptrp1.framework */; };
 		B2040A9622A59E6500132927 /* git in Resources */ = {isa = PBXBuildFile; fileRef = B2040A9522A59E4B00132927 /* git */; };
+		B2040A9F22A5A2B500132927 /* icon.icns in Resources */ = {isa = PBXBuildFile; fileRef = B2040A9E22A5A2B500132927 /* icon.icns */; };
+		B2040AA222A5A2B500132927 /* ShareViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B2040AA122A5A2B500132927 /* ShareViewController.m */; };
+		B2040AA522A5A2B500132927 /* ShareViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = B2040AA322A5A2B500132927 /* ShareViewController.xib */; };
+		B2040AAA22A5A2B500132927 /* Dpt Air.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = B2040A9C22A5A2B500132927 /* Dpt Air.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		B20D541122A5FEEA00453DBA /* Quartz.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B20D541022A5FEEA00453DBA /* Quartz.framework */; };
+		B20D541322A5FEF900453DBA /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B20D541222A5FEF900453DBA /* QuartzCore.framework */; };
 		B2133148229BAD8F008B21AA /* AppDelegate.mm in Sources */ = {isa = PBXBuildFile; fileRef = B2133147229BAD8F008B21AA /* AppDelegate.mm */; };
 		B213314A229BAD90008B21AA /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B2133149229BAD90008B21AA /* Assets.xcassets */; };
 		B213314D229BAD90008B21AA /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = B213314B229BAD90008B21AA /* MainMenu.xib */; };
@@ -27,6 +33,13 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		B2040AA822A5A2B500132927 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = B213313B229BAD8F008B21AA /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = B2040A9B22A5A2B500132927;
+			remoteInfo = "Dpt Air Share Extension";
+		};
 		B262250422A2C5B300AE061C /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = B262250022A2C5B200AE061C /* Dpt Air Bluetooth Helper.xcodeproj */;
@@ -43,6 +56,20 @@
 		};
 /* End PBXContainerItemProxy section */
 
+/* Begin PBXCopyFilesBuildPhase section */
+		B2040AAE22A5A2B500132927 /* Embed App Extensions */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 13;
+			files = (
+				B2040AAA22A5A2B500132927 /* Dpt Air.appex in Embed App Extensions */,
+			);
+			name = "Embed App Extensions";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
 /* Begin PBXFileReference section */
 		B2040A8922A59C0B00132927 /* libboost_filesystem.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libboost_filesystem.a; path = ../../../../usr/local/Cellar/boost/1.69.0_2/lib/libboost_filesystem.a; sourceTree = "<group>"; };
 		B2040A8B22A59C7600132927 /* libsqlite3.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libsqlite3.a; path = ../../../../usr/local/Cellar/sqlite/3.28.0/lib/libsqlite3.a; sourceTree = "<group>"; };
@@ -50,6 +77,15 @@
 		B2040A8F22A59CAE00132927 /* libcrypto.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libcrypto.a; path = ../../../../usr/local/Cellar/openssl/1.0.2r/lib/libcrypto.a; sourceTree = "<group>"; };
 		B2040A9122A59CBE00132927 /* libNFHTTP.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libNFHTTP.a; sourceTree = "<group>"; };
 		B2040A9522A59E4B00132927 /* git */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.executable"; path = git; sourceTree = "<group>"; };
+		B2040A9C22A5A2B500132927 /* Dpt Air.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = "Dpt Air.appex"; sourceTree = BUILT_PRODUCTS_DIR; };
+		B2040A9E22A5A2B500132927 /* icon.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = icon.icns; sourceTree = "<group>"; };
+		B2040AA022A5A2B500132927 /* ShareViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ShareViewController.h; sourceTree = "<group>"; };
+		B2040AA122A5A2B500132927 /* ShareViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ShareViewController.m; sourceTree = "<group>"; };
+		B2040AA422A5A2B500132927 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/ShareViewController.xib; sourceTree = "<group>"; };
+		B2040AA622A5A2B500132927 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		B2040AA722A5A2B500132927 /* Dpt_Air_Share_Extension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Dpt_Air_Share_Extension.entitlements; sourceTree = "<group>"; };
+		B20D541022A5FEEA00453DBA /* Quartz.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Quartz.framework; path = System/Library/Frameworks/Quartz.framework; sourceTree = SDKROOT; };
+		B20D541222A5FEF900453DBA /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		B2133143229BAD8F008B21AA /* Dpt Air.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Dpt Air.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		B2133146229BAD8F008B21AA /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		B2133147229BAD8F008B21AA /* AppDelegate.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = AppDelegate.mm; sourceTree = "<group>"; };
@@ -72,6 +108,15 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		B2040A9922A5A2B500132927 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				B20D541322A5FEF900453DBA /* QuartzCore.framework in Frameworks */,
+				B20D541122A5FEEA00453DBA /* Quartz.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		B2133140229BAD8F008B21AA /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -91,12 +136,26 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		B2040A9D22A5A2B500132927 /* Dpt Air Share Extension */ = {
+			isa = PBXGroup;
+			children = (
+				B2040A9E22A5A2B500132927 /* icon.icns */,
+				B2040AA022A5A2B500132927 /* ShareViewController.h */,
+				B2040AA122A5A2B500132927 /* ShareViewController.m */,
+				B2040AA322A5A2B500132927 /* ShareViewController.xib */,
+				B2040AA622A5A2B500132927 /* Info.plist */,
+				B2040AA722A5A2B500132927 /* Dpt_Air_Share_Extension.entitlements */,
+			);
+			path = "Dpt Air Share Extension";
+			sourceTree = "<group>";
+		};
 		B213313A229BAD8F008B21AA = {
 			isa = PBXGroup;
 			children = (
 				B2040A9522A59E4B00132927 /* git */,
 				B262250022A2C5B200AE061C /* Dpt Air Bluetooth Helper.xcodeproj */,
 				B2133145229BAD8F008B21AA /* Dpt Air */,
+				B2040A9D22A5A2B500132927 /* Dpt Air Share Extension */,
 				B2133144229BAD8F008B21AA /* Products */,
 				B2B4DFC5229F1F9A002B6E3E /* Frameworks */,
 			);
@@ -106,6 +165,7 @@
 			isa = PBXGroup;
 			children = (
 				B2133143229BAD8F008B21AA /* Dpt Air.app */,
+				B2040A9C22A5A2B500132927 /* Dpt Air.appex */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -141,6 +201,8 @@
 		B2B4DFC5229F1F9A002B6E3E /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				B20D541222A5FEF900453DBA /* QuartzCore.framework */,
+				B20D541022A5FEEA00453DBA /* Quartz.framework */,
 				B2040A9122A59CBE00132927 /* libNFHTTP.a */,
 				B2040A8F22A59CAE00132927 /* libcrypto.a */,
 				B2040A8D22A59CA200132927 /* libssl.a */,
@@ -157,6 +219,23 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		B2040A9B22A5A2B500132927 /* Dpt Air Share Extension */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = B2040AAB22A5A2B500132927 /* Build configuration list for PBXNativeTarget "Dpt Air Share Extension" */;
+			buildPhases = (
+				B2040A9822A5A2B500132927 /* Sources */,
+				B2040A9922A5A2B500132927 /* Frameworks */,
+				B2040A9A22A5A2B500132927 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "Dpt Air Share Extension";
+			productName = "Dpt Air Share Extension";
+			productReference = B2040A9C22A5A2B500132927 /* Dpt Air.appex */;
+			productType = "com.apple.product-type.app-extension";
+		};
 		B2133142229BAD8F008B21AA /* Dpt Air */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = B2133154229BAD90008B21AA /* Build configuration list for PBXNativeTarget "Dpt Air" */;
@@ -164,11 +243,13 @@
 				B213313F229BAD8F008B21AA /* Sources */,
 				B2133140229BAD8F008B21AA /* Frameworks */,
 				B2133141229BAD8F008B21AA /* Resources */,
+				B2040AAE22A5A2B500132927 /* Embed App Extensions */,
 			);
 			buildRules = (
 			);
 			dependencies = (
 				B262250822A2C93300AE061C /* PBXTargetDependency */,
+				B2040AA922A5A2B500132927 /* PBXTargetDependency */,
 			);
 			name = "Dpt Air";
 			productName = "Dpt Air";
@@ -184,6 +265,14 @@
 				LastUpgradeCheck = 1020;
 				ORGANIZATIONNAME = "Yu Li";
 				TargetAttributes = {
+					B2040A9B22A5A2B500132927 = {
+						CreatedOnToolsVersion = 10.2.1;
+						SystemCapabilities = {
+							com.apple.ApplicationGroups.Mac = {
+								enabled = 1;
+							};
+						};
+					};
 					B2133142229BAD8F008B21AA = {
 						CreatedOnToolsVersion = 10.2.1;
 						SystemCapabilities = {
@@ -220,6 +309,7 @@
 			projectRoot = "";
 			targets = (
 				B2133142229BAD8F008B21AA /* Dpt Air */,
+				B2040A9B22A5A2B500132927 /* Dpt Air Share Extension */,
 			);
 		};
 /* End PBXProject section */
@@ -235,6 +325,15 @@
 /* End PBXReferenceProxy section */
 
 /* Begin PBXResourcesBuildPhase section */
+		B2040A9A22A5A2B500132927 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				B2040AA522A5A2B500132927 /* ShareViewController.xib in Resources */,
+				B2040A9F22A5A2B500132927 /* icon.icns in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		B2133141229BAD8F008B21AA /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -249,6 +348,14 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		B2040A9822A5A2B500132927 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				B2040AA222A5A2B500132927 /* ShareViewController.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		B213313F229BAD8F008B21AA /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -263,6 +370,11 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
+		B2040AA922A5A2B500132927 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = B2040A9B22A5A2B500132927 /* Dpt Air Share Extension */;
+			targetProxy = B2040AA822A5A2B500132927 /* PBXContainerItemProxy */;
+		};
 		B262250822A2C93300AE061C /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			name = "Dpt Air Bluetooth Helper";
@@ -271,6 +383,14 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
+		B2040AA322A5A2B500132927 /* ShareViewController.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				B2040AA422A5A2B500132927 /* Base */,
+			);
+			name = ShareViewController.xib;
+			sourceTree = "<group>";
+		};
 		B213314B229BAD90008B21AA /* MainMenu.xib */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -282,6 +402,44 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
+		B2040AAC22A5A2B500132927 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_ENTITLEMENTS = "Dpt Air Share Extension/Dpt_Air_Share_Extension.entitlements";
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				DEVELOPMENT_TEAM = JAL3299Z9M;
+				INFOPLIST_FILE = "Dpt Air Share Extension/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+					"@executable_path/../../../../Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "com.dpt-air.Dpt-Air.Dpt-Air-Share-Extension";
+				PRODUCT_NAME = "Dpt Air";
+				SKIP_INSTALL = YES;
+			};
+			name = Debug;
+		};
+		B2040AAD22A5A2B500132927 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_ENTITLEMENTS = "Dpt Air Share Extension/Dpt_Air_Share_Extension.entitlements";
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				DEVELOPMENT_TEAM = JAL3299Z9M;
+				INFOPLIST_FILE = "Dpt Air Share Extension/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+					"@executable_path/../../../../Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "com.dpt-air.Dpt-Air.Dpt-Air-Share-Extension";
+				PRODUCT_NAME = "Dpt Air";
+				SKIP_INSTALL = YES;
+			};
+			name = Release;
+		};
 		B2133152229BAD90008B21AA /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -458,6 +616,15 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		B2040AAB22A5A2B500132927 /* Build configuration list for PBXNativeTarget "Dpt Air Share Extension" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				B2040AAC22A5A2B500132927 /* Debug */,
+				B2040AAD22A5A2B500132927 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		B213313E229BAD8F008B21AA /* Build configuration list for PBXProject "Dpt Air" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
