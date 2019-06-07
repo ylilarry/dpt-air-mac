@@ -94,7 +94,8 @@
         NSString* time = [dateFormatter stringFromDate:date];
         NSString* commit = [NSString stringWithUTF8String:gc->commit.c_str()];
         NSString* title = [NSString stringWithUTF8String:gc->title.c_str()];
-        [buffer addObject:@{@"commit":commit, @"time": time, @"title": title, @"buttonTarget": self}];
+        NSString* message = [NSString stringWithUTF8String:gc->message.c_str()];
+        [buffer addObject:@{@"commit":commit, @"time": time, @"title": title, @"message":message, @"buttonTarget": self}];
     }
     [self.rollbackHistory setContent:buffer];
 }
@@ -195,4 +196,25 @@
     }];
 }
 
+- (IBAction)onInfoButtonClicked:(NSTableCellView*)sender dict:(NSDictionary*)obj
+{
+    NSString* commit = obj[@"commit"];
+    NSString* message = obj[@"message"];
+    NSString* time = obj[@"time"];
+    self.textPopover.text = [NSString stringWithFormat:@"Commit: %@\nTime: %@\nMessage:\n\n%@", commit, time, message];
+    [self.textPopover showRelativeToRect:sender.frame ofView:sender preferredEdge:NSRectEdgeMinX];
+}
+
+@end
+
+@implementation TextPopover
+- (void)showRelativeToRect:(NSRect)positioningRect ofView:(NSView *)positioningView preferredEdge:(NSRectEdge)preferredEdge
+{
+    TextPopoverViewController* vc = (TextPopoverViewController*)self.contentViewController;
+    vc.label.stringValue = self.text;
+    [super showRelativeToRect:positioningRect ofView:positioningView preferredEdge:preferredEdge];
+}
+@end
+
+@implementation TextPopoverViewController
 @end
