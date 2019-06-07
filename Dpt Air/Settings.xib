@@ -21,7 +21,7 @@
             <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
             <rect key="contentRect" x="453" y="329" width="551" height="397"/>
             <rect key="screenRect" x="0.0" y="0.0" width="1440" height="877"/>
-            <view key="contentView" id="qFg-1G-Fi8">
+            <view key="contentView" id="qFg-1G-Fi8" customClass="SettingsView">
                 <rect key="frame" x="0.0" y="0.0" width="551" height="397"/>
                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                 <subviews>
@@ -31,16 +31,16 @@
                         <tabViewItems>
                             <tabViewItem label="Paths" identifier="" id="305-zR-9mg">
                                 <view key="view" id="tI2-Aa-aF4">
-                                    <rect key="frame" x="10" y="33" width="517" height="342"/>
+                                    <rect key="frame" x="10" y="33" width="515" height="342"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     <subviews>
                                         <stackView distribution="fillEqually" orientation="vertical" alignment="leading" spacing="20" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="lF5-do-igf">
-                                            <rect key="frame" x="10" y="30" width="497" height="302"/>
+                                            <rect key="frame" x="10" y="30" width="495" height="302"/>
                                             <subviews>
                                                 <box borderType="none" title="Sync Folder" titlePosition="aboveTop" translatesAutoresizingMaskIntoConstraints="NO" id="YxL-e5-cjt">
-                                                    <rect key="frame" x="-3" y="248" width="503" height="56"/>
+                                                    <rect key="frame" x="-3" y="248" width="501" height="56"/>
                                                     <view key="contentView" id="4TB-DB-TJL">
-                                                        <rect key="frame" x="10" y="0.0" width="483" height="38"/>
+                                                        <rect key="frame" x="10" y="0.0" width="481" height="38"/>
                                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                         <subviews>
                                                             <button horizontalHuggingPriority="1000" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="KLp-sb-TeF">
@@ -54,7 +54,7 @@
                                                                 </connections>
                                                             </button>
                                                             <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="DEv-kF-B2H">
-                                                                <rect key="frame" x="75" y="11" width="410" height="17"/>
+                                                                <rect key="frame" x="75" y="11" width="408" height="17"/>
                                                                 <textFieldCell key="cell" lineBreakMode="truncatingTail" title="Choose a folder to sync with DPT-RP1" id="GtU-ME-By2">
                                                                     <font key="font" metaFont="system"/>
                                                                     <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
@@ -88,9 +88,9 @@
                                                     <rect key="frame" x="0.0" y="229" width="96" height="5"/>
                                                 </box>
                                                 <box autoresizesSubviews="NO" borderType="none" title="Digital Paper App" titlePosition="aboveTop" translatesAutoresizingMaskIntoConstraints="NO" id="fRa-kv-qNJ">
-                                                    <rect key="frame" x="-3" y="157" width="503" height="56"/>
+                                                    <rect key="frame" x="-3" y="157" width="501" height="56"/>
                                                     <view key="contentView" id="HD8-3f-NbG">
-                                                        <rect key="frame" x="10" y="0.0" width="483" height="38"/>
+                                                        <rect key="frame" x="10" y="0.0" width="481" height="38"/>
                                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                         <subviews>
                                                             <button horizontalHuggingPriority="1000" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="3Oj-1z-eSo">
@@ -111,7 +111,7 @@
                                                                 </buttonCell>
                                                             </button>
                                                             <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="W3k-gd-7Bj">
-                                                                <rect key="frame" x="106" y="11" width="379" height="17"/>
+                                                                <rect key="frame" x="106" y="11" width="377" height="17"/>
                                                                 <textFieldCell key="cell" lineBreakMode="truncatingTail" title="Digital Paper App not found" id="d0a-eU-9DH">
                                                                     <font key="font" metaFont="system"/>
                                                                     <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
@@ -147,9 +147,9 @@
                                                     <rect key="frame" x="0.0" y="138" width="96" height="5"/>
                                                 </box>
                                                 <box borderType="none" title="Device ID" titlePosition="aboveTop" translatesAutoresizingMaskIntoConstraints="NO" id="lp3-jr-evR">
-                                                    <rect key="frame" x="-3" y="66" width="503" height="56"/>
+                                                    <rect key="frame" x="-3" y="66" width="501" height="56"/>
                                                     <view key="contentView" id="E7R-97-GvG">
-                                                        <rect key="frame" x="10" y="0.0" width="483" height="38"/>
+                                                        <rect key="frame" x="10" y="0.0" width="481" height="38"/>
                                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                         <subviews>
                                                             <button horizontalHuggingPriority="1000" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="fj7-Nq-d9x">
@@ -174,7 +174,7 @@
                                                                 </connections>
                                                             </button>
                                                             <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="5q9-yh-mFK">
-                                                                <rect key="frame" x="106" y="11" width="379" height="17"/>
+                                                                <rect key="frame" x="106" y="11" width="377" height="17"/>
                                                                 <textFieldCell key="cell" lineBreakMode="truncatingTail" title="Device id not found" id="dLU-Ah-XMX">
                                                                     <font key="font" metaFont="system"/>
                                                                     <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
@@ -208,9 +208,9 @@
                                                     <font key="titleFont" metaFont="system"/>
                                                 </box>
                                                 <box borderType="none" title="Private Key" titlePosition="aboveTop" translatesAutoresizingMaskIntoConstraints="NO" id="Pr8-Og-wTP">
-                                                    <rect key="frame" x="-3" y="-4" width="503" height="56"/>
+                                                    <rect key="frame" x="-3" y="-4" width="501" height="56"/>
                                                     <view key="contentView" id="vha-P7-1Kq">
-                                                        <rect key="frame" x="10" y="0.0" width="483" height="38"/>
+                                                        <rect key="frame" x="10" y="0.0" width="481" height="38"/>
                                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                         <subviews>
                                                             <button horizontalHuggingPriority="1000" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="F3b-fm-bUh">
@@ -235,7 +235,7 @@
                                                                 </connections>
                                                             </button>
                                                             <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="hvb-3I-c7B">
-                                                                <rect key="frame" x="106" y="11" width="379" height="17"/>
+                                                                <rect key="frame" x="106" y="11" width="377" height="17"/>
                                                                 <textFieldCell key="cell" lineBreakMode="truncatingTail" alignment="left" title="Private key not found" id="hDb-0q-bub">
                                                                     <font key="font" metaFont="system"/>
                                                                     <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
@@ -597,7 +597,7 @@
                                             <rect key="frame" x="0.0" y="0.0" width="515" height="342"/>
                                             <clipView key="contentView" id="AGa-bJ-yoz">
                                                 <rect key="frame" x="0.0" y="0.0" width="515" height="342"/>
-                                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                                <autoresizingMask key="autoresizingMask"/>
                                                 <subviews>
                                                     <tableView canDrawConcurrently="YES" verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" alternatingRowBackgroundColors="YES" columnSelection="YES" multipleSelection="NO" autosaveColumns="NO" rowHeight="24" rowSizeStyle="systemDefault" headerView="Okg-m3-tgb" viewBased="YES" id="HV9-Vs-Hnz">
                                                         <rect key="frame" x="0.0" y="0.0" width="515" height="317"/>

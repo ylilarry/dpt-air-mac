@@ -16,8 +16,24 @@
 
 @end
 
-@implementation Settings
+@implementation SettingsView
 
+- (BOOL)performKeyEquivalent:(NSEvent *)event
+{
+    if (event.modifierFlags & NSEventModifierFlagCommand) {
+        unsigned code = event.keyCode;
+        if (code == 13) {
+            /* Cmd + W */
+            [self.window close];
+            return YES;
+        }
+    }
+    return [super performKeyEquivalent:event];
+}
+
+@end
+
+@implementation Settings
 
 - (void)viewWillAppear
 {

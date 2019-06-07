@@ -10,6 +10,9 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
+@interface SettingsView : NSView
+@end
+
 @interface Settings : NSViewController
 
 @property IBOutlet NSArrayController* bluetoothDevices;

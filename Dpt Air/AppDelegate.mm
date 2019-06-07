@@ -155,7 +155,7 @@
 
 - (IBAction)displaySettingsWindow:(id)sender
 {
-//    [self.settings.view.window setLevel:NSPopUpMenuWindowLevel];
+    [self.settings.view.window setLevel:NSNormalWindowLevel];
     [self.settings.view.window orderFrontRegardless];
 }
 
