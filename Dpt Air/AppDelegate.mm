@@ -50,6 +50,18 @@
     [self autoDetectSettings];
 //    [NSUserDefaults.standardUserDefaults addSuiteNamed:@"group.com.dpt-air"];
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0), ^{
+        while(true) {
+            NSInteger enabled = [NSUserDefaults.standardUserDefaults integerForKey:@"enable_scheduled_sync"];
+            if (enabled) {
+                [self performSelectorOnMainThread:@selector(syncAll:) withObject:self waitUntilDone:YES];
+                NSInteger mins = [NSUserDefaults.standardUserDefaults integerForKey:@"scheduled_sync_interval"];
+                [NSThread sleepForTimeInterval:MAX(mins*60, 60)];
+            } else {
+                [NSThread sleepForTimeInterval:60];
+            }
+        }
+    });
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0), ^{
         NSUserDefaults* shared_defaults = [[NSUserDefaults alloc] initWithSuiteName:@"group.com.dpt-air"];
         while(true) {
             NSArray<NSString*>* arr = [shared_defaults objectForKey:@"to_open"];
@@ -110,6 +122,10 @@
      context:nil];
     [NSUserDefaults.standardUserDefaults
      addObserver:self forKeyPath:@"message"
+     options:NSKeyValueObservingOptionInitial|NSKeyValueObservingOptionNew
+     context:nil];
+    [NSUserDefaults.standardUserDefaults
+     addObserver:self forKeyPath:@"scheduled_sync_interval"
      options:NSKeyValueObservingOptionInitial|NSKeyValueObservingOptionNew
      context:nil];
     [self checkReady];
@@ -236,7 +252,7 @@
     dispatch_async(dispatch_get_global_queue(QOS_CLASS_USER_INITIATED, 0), ^{
         self.message = @"Waiting for Bluetooth Connection...";
         while (! device.isConnected) {
-            [NSThread sleepForTimeInterval:0.5];
+            [NSThread sleepForTimeInterval:1];
         }
         
         [self.dpt_lock lock];
