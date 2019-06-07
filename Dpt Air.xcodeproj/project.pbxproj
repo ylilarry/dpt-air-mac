@@ -24,7 +24,7 @@
 		B213314A229BAD90008B21AA /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B2133149229BAD90008B21AA /* Assets.xcassets */; };
 		B213314D229BAD90008B21AA /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = B213314B229BAD90008B21AA /* MainMenu.xib */; };
 		B2133150229BAD90008B21AA /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = B213314F229BAD90008B21AA /* main.m */; };
-		B26224DF22A2BB1F00AE061C /* common.m in Sources */ = {isa = PBXBuildFile; fileRef = B26224DE22A2BB1F00AE061C /* common.m */; };
+		B26224DF22A2BB1F00AE061C /* common.mm in Sources */ = {isa = PBXBuildFile; fileRef = B26224DE22A2BB1F00AE061C /* common.mm */; };
 		B27E3F0822A1DE3F0077194E /* IOBluetoothUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B27E3F0722A1DE3F0077194E /* IOBluetoothUI.framework */; };
 		B2B4E002229F38DB002B6E3E /* Settings.xib in Resources */ = {isa = PBXBuildFile; fileRef = B2B4E001229F38DB002B6E3E /* Settings.xib */; };
 		B2B4E005229F3DE7002B6E3E /* Settings.mm in Sources */ = {isa = PBXBuildFile; fileRef = B2B4E004229F3DE7002B6E3E /* Settings.mm */; };
@@ -95,7 +95,7 @@
 		B213314F229BAD90008B21AA /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		B2133151229BAD90008B21AA /* Dpt_Air.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Dpt_Air.entitlements; sourceTree = "<group>"; };
 		B26224DD22A2BA8F00AE061C /* common.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = common.h; sourceTree = "<group>"; };
-		B26224DE22A2BB1F00AE061C /* common.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = common.m; sourceTree = "<group>"; };
+		B26224DE22A2BB1F00AE061C /* common.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = common.mm; sourceTree = "<group>"; };
 		B262250022A2C5B200AE061C /* Dpt Air Bluetooth Helper.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = "Dpt Air Bluetooth Helper.xcodeproj"; path = "Dpt Air Bluetooth Helper/Dpt Air Bluetooth Helper.xcodeproj"; sourceTree = "<group>"; };
 		B27E3F0722A1DE3F0077194E /* IOBluetoothUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = IOBluetoothUI.framework; path = System/Library/Frameworks/IOBluetoothUI.framework; sourceTree = SDKROOT; };
 		B27E3F0D22A206CE0077194E /* Dpt Air.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "Dpt Air.entitlements"; sourceTree = "<group>"; };
@@ -175,7 +175,7 @@
 			children = (
 				B27E3F0D22A206CE0077194E /* Dpt Air.entitlements */,
 				B26224DD22A2BA8F00AE061C /* common.h */,
-				B26224DE22A2BB1F00AE061C /* common.m */,
+				B26224DE22A2BB1F00AE061C /* common.mm */,
 				B213314B229BAD90008B21AA /* MainMenu.xib */,
 				B2133146229BAD8F008B21AA /* AppDelegate.h */,
 				B2133147229BAD8F008B21AA /* AppDelegate.mm */,
@@ -360,7 +360,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B26224DF22A2BB1F00AE061C /* common.m in Sources */,
+				B26224DF22A2BB1F00AE061C /* common.mm in Sources */,
 				B2133150229BAD90008B21AA /* main.m in Sources */,
 				B2133148229BAD8F008B21AA /* AppDelegate.mm in Sources */,
 				B2B4E005229F3DE7002B6E3E /* Settings.mm in Sources */,
@@ -405,6 +405,7 @@
 		B2040AAC22A5A2B500132927 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_WARN_DOCUMENTATION_COMMENTS = NO;
 				CODE_SIGN_ENTITLEMENTS = "Dpt Air Share Extension/Dpt_Air_Share_Extension.entitlements";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
@@ -424,6 +425,7 @@
 		B2040AAD22A5A2B500132927 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_WARN_DOCUMENTATION_COMMENTS = NO;
 				CODE_SIGN_ENTITLEMENTS = "Dpt Air Share Extension/Dpt_Air_Share_Extension.entitlements";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
@@ -457,7 +459,7 @@
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
 				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
-				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = NO;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
 				CLANG_WARN_INFINITE_RECURSION = YES;
@@ -516,7 +518,7 @@
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
 				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
-				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = NO;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
 				CLANG_WARN_INFINITE_RECURSION = YES;
@@ -555,11 +557,17 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_WARN_COMMA = NO;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_PRAGMA_PACK = YES;
 				CODE_SIGN_ENTITLEMENTS = "Dpt Air/Dpt Air.entitlements";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				DEVELOPMENT_TEAM = JAL3299Z9M;
 				FRAMEWORK_SEARCH_PATHS = "$(PROJECT_DIR)";
+				GCC_TREAT_INCOMPATIBLE_POINTER_TYPE_WARNINGS_AS_ERRORS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = NO;
+				GCC_WARN_SHADOW = NO;
 				HEADER_SEARCH_PATHS = (
 					"$(PROJECT_DIR)/dptrp1.framework/Headers",
 					/usr/local/Cellar/boost/1.69.0_2/include/,
@@ -586,11 +594,17 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_WARN_COMMA = NO;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_PRAGMA_PACK = YES;
 				CODE_SIGN_ENTITLEMENTS = "Dpt Air/Dpt Air.entitlements";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				DEVELOPMENT_TEAM = JAL3299Z9M;
 				FRAMEWORK_SEARCH_PATHS = "$(PROJECT_DIR)";
+				GCC_TREAT_INCOMPATIBLE_POINTER_TYPE_WARNINGS_AS_ERRORS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = NO;
+				GCC_WARN_SHADOW = NO;
 				HEADER_SEARCH_PATHS = (
 					"$(PROJECT_DIR)/dptrp1.framework/Headers",
 					/usr/local/Cellar/boost/1.69.0_2/include/,

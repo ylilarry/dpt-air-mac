@@ -32,7 +32,7 @@
     [item.attachments enumerateObjectsUsingBlock:^(NSItemProvider * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
         *stop = YES;
         // TODO: handle multiple files
-        BOOL has_pdf = [obj hasRepresentationConformingToTypeIdentifier:kUTTypePDF fileOptions:0];
+        BOOL has_pdf = [obj hasRepresentationConformingToTypeIdentifier:(NSString*)kUTTypePDF fileOptions:0];
         if (! has_pdf) { return; }
         NSLog(@"obj %@", obj);
         @synchronized(await_count) {

@@ -32,10 +32,5 @@
 	<string>MainMenu</string>
 	<key>NSPrincipalClass</key>
 	<string>NSApplication</string>
-	<key>NSServices</key>
-	<array>
-		<dict/>
-		<dict/>
-	</array>
 </dict>
 </plist>

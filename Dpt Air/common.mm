@@ -21,7 +21,7 @@
     // decode
     safe = [NSURL URLByResolvingBookmarkData:data options:NSURLBookmarkResolutionWithSecurityScope relativeToURL:nil bookmarkDataIsStale:&stale error:nil];
     // re-encode until not stale
-    while (stale || safe == nil) {
+    if (stale || safe == nil) {
         // re-encode
         data = [self bookmarkDataWithOptions:NSURLBookmarkCreationWithSecurityScope includingResourceValuesForKeys:nil relativeToURL:nil error:&error];
         // verify

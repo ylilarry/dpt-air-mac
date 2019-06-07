@@ -14,6 +14,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property IBOutlet NSArrayController* bluetoothDevices;
 @property IBOutlet NSTableView* bluetoothTable;
+@property IBOutlet NSTableView* rollbackTable;
+@property IBOutlet NSArrayController* rollbackHistory;
 
 @end
 

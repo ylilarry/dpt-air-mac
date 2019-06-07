@@ -10,6 +10,7 @@
 #define common_h
 
 #import <Cocoa/Cocoa.h>
+#include <dptrp1/dptrp1.h>
 
 @interface NSURL(Dpt)
 - (void)withSecured:(void (^_Nonnull)(NSURL* __nonnull url))fn;

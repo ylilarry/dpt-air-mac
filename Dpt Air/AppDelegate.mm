@@ -15,7 +15,19 @@
 #import <CoreFoundation/CoreFoundation.h>
 #import "common.h"
 
+@implementation NSApplication(Dpt)
+- (AppDelegate*)appDelegate
+{
+    return self.delegate;
+}
+@end
+
 @implementation AppDelegate
+
+- (NSURL*)unsafe_sync_dir
+{
+    return [NSUserDefaults.standardUserDefaults URLForKey:@"sync_dir"];
+}
 
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification {
     // Insert code here to initialize your application
@@ -24,19 +36,18 @@
     self.dpt_lock = [[NSLock alloc] init];
     self.status_title = @"DP";
     self.shared_app_dir = [[NSFileManager defaultManager] containerURLForSecurityApplicationGroupIdentifier:@"group.com.dpt-air"];
-    self.m_dpt = make_shared<Dpt>();
+    self.dpt = make_shared<Dpt>();
     NSURL* log_file_path = [self.shared_app_dir URLByAppendingPathComponent:@"dpt-air.log"];
     self.log_file = make_shared<std::ofstream>(std::string(log_file_path.path.UTF8String), std::ios_base::out);
-    self.m_dpt->setLogger(*self.log_file);
-    self.m_dpt->setMessager([=](string const& msg) {
-        [self performSelectorOnMainThread:@selector(setMessage:) withObject:[NSString stringWithUTF8String:msg.c_str()] waitUntilDone:NO];
+    self.dpt->setLogger(*self.log_file);
+    self.dpt->setMessager([=](string const& msg) {
+        [self performSelectorOnMainThread:@selector(setMessage:) withObject:[NSString stringWithUTF8String:msg.c_str()] waitUntilDone:YES];
     });
     self.dpt_authenticated = NO;
     self.statusItem = [NSStatusBar.systemStatusBar statusItemWithLength:NSSquareStatusItemLength];
     self.statusItem.button.title = @"DP";
     self.statusItem.menu = self.statusItemMenu;
     [self autoDetectSettings];
-    NSUserDefaults* shared_defaults = [[NSUserDefaults alloc] initWithSuiteName:@"group.com.dpt-air"];
 //    [NSUserDefaults.standardUserDefaults addSuiteNamed:@"group.com.dpt-air"];
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0), ^{
         NSUserDefaults* shared_defaults = [[NSUserDefaults alloc] initWithSuiteName:@"group.com.dpt-air"];
@@ -45,7 +56,7 @@
             [arr enumerateObjectsUsingBlock:^(NSString * _Nonnull s, NSUInteger idx, BOOL * _Nonnull stop) {
                 NSURL* url = [NSURL URLWithString:s];
                 self.message = [NSString stringWithFormat:@"Sending %@ to DPT-RP1...", url.lastPathComponent];
-                [self.statusItem performSelectorOnMainThread:@selector(popUpStatusItemMenu:) withObject:self.statusItemMenu waitUntilDone:YES];
+                [self.statusItem performSelectorOnMainThread:@selector(popUpStatusItemMenu:) withObject:self.statusItemMenu waitUntilDone:NO];
                 [self.dpt_lock lock];
                 [self startCheckingDptBusyStatus];
                 try {
@@ -53,10 +64,10 @@
                     NSURL* private_key = [NSUserDefaults.standardUserDefaults URLForKey:@"private_key"];
                     NSURL* device_id = [NSUserDefaults.standardUserDefaults URLForKey:@"device_id"];
                     [sync_dir withSecured:^(NSURL * _Nonnull _) {
-                        [private_key withSecured:^(NSURL * _Nonnull _) {
-                            [device_id withSecured:^(NSURL * _Nonnull _) {
+                        [private_key withSecured:^(NSURL * _Nonnull __) {
+                            [device_id withSecured:^(NSURL * _Nonnull ___) {
                                 [self authenticateDPT];
-                                self.m_dpt->dptQuickUploadAndOpen(std::string(url.path.UTF8String));
+                                self.dpt->dptQuickUploadAndOpen(std::string(url.path.UTF8String));
                             }];
                         }];
                     }];
@@ -81,23 +92,28 @@
          addObserver:self forKeyPath:@"enable_sync_on_change"
          options:NSKeyValueObservingOptionInitial|NSKeyValueObservingOptionNew
          context:nil];
-    [NSUserDefaultsController.sharedUserDefaultsController.values
+    [NSUserDefaults.standardUserDefaults
         addObserver:self forKeyPath:@"sync_dir"
         options:NSKeyValueObservingOptionInitial|NSKeyValueObservingOptionNew
         context:nil];
-    [NSUserDefaultsController.sharedUserDefaultsController.values
+    [NSUserDefaults.standardUserDefaults
          addObserver:self forKeyPath:@"private_key"
          options:NSKeyValueObservingOptionInitial|NSKeyValueObservingOptionNew
          context:nil];
-    [NSUserDefaultsController.sharedUserDefaultsController.values
-         addObserver:self forKeyPath:@"device_key"
+    [NSUserDefaults.standardUserDefaults
+         addObserver:self forKeyPath:@"device_id"
          options:NSKeyValueObservingOptionInitial|NSKeyValueObservingOptionNew
          context:nil];
-    [NSUserDefaultsController.sharedUserDefaultsController.values
+    [NSUserDefaults.standardUserDefaults
+     addObserver:self forKeyPath:@"bluetooth_device"
+     options:NSKeyValueObservingOptionInitial|NSKeyValueObservingOptionNew
+     context:nil];
+    [NSUserDefaults.standardUserDefaults
      addObserver:self forKeyPath:@"message"
      options:NSKeyValueObservingOptionInitial|NSKeyValueObservingOptionNew
      context:nil];
     [self checkReady];
+    self.message = @"Ready to Sync";
 }
 
 - (void)authenticateDPT
@@ -105,13 +121,13 @@
     NSURL* sync_dir = [NSUserDefaults.standardUserDefaults URLForKey:@"sync_dir"];
     NSURL* private_key = [NSUserDefaults.standardUserDefaults URLForKey:@"private_key"];
     NSURL* device_id = [NSUserDefaults.standardUserDefaults URLForKey:@"device_id"];
-    self.m_dpt->setClientIdPath(std::string(device_id.path.UTF8String));
-    self.m_dpt->setPrivateKeyPath(std::string(private_key.path.UTF8String));
-    self.m_dpt->setSyncDir(std::string(sync_dir.path.UTF8String));
+    self.dpt->setClientIdPath(std::string(device_id.path.UTF8String));
+    self.dpt->setPrivateKeyPath(std::string(private_key.path.UTF8String));
+    self.dpt->setSyncDir(std::string(sync_dir.path.UTF8String));
     NSString* gitpath = [NSBundle.mainBundle pathForResource:@"git" ofType:nil];
-    self.m_dpt->setGitPath(std::string(gitpath.UTF8String));
-    self.m_dpt->setupSyncDir();
-    self.m_dpt->authenticate();
+    self.dpt->setGitPath(std::string(gitpath.UTF8String));
+    self.dpt->setupSyncDir();
+    self.dpt->authenticate();
 }
 
 - (void)checkReady
@@ -128,14 +144,10 @@
                         change:(NSDictionary<NSKeyValueChangeKey,id> *)change
                        context:(void *)context
 {
-//    if ([keyPath isEqualToString:@"to_open"]) {
-//        NSUserDefaults* shared_defaults = [[NSUserDefaults alloc] initWithSuiteName:@"group.com.dpt-air"];
-//        id val = [shared_defaults objectForKey:keyPath];
-//        NSLog(@"%@", val);
-//    }
     if ([keyPath isEqualToString:@"sync_dir"]
         || [keyPath isEqualToString:@"private_key"]
-        || [keyPath isEqualToString:@"device_id"])
+        || [keyPath isEqualToString:@"device_id"]
+        || [keyPath isEqualToString:@"bluetooth_device"])
     {
         [self checkReady];
     }
@@ -143,8 +155,8 @@
 
 - (IBAction)displaySettingsWindow:(id)sender
 {
-    [self.settings.view.window setLevel:NSFloatingWindowLevel];
-    [self.settings.view.window makeKeyAndOrderFront:sender];
+//    [self.settings.view.window setLevel:NSPopUpMenuWindowLevel];
+    [self.settings.view.window orderFrontRegardless];
 }
 
 - (void)applicationWillTerminate:(NSNotification *)aNotification {
@@ -159,7 +171,7 @@
 
 - (IOBluetoothDevice*)autoConnectBluetooth
 {
-    NSArray* devices = IOBluetoothDevice.favoriteDevices;
+    NSArray* devices = IOBluetoothDevice.pairedDevices;
     NSString* bluetooth_device = [NSUserDefaults.standardUserDefaults stringForKey:@"bluetooth_device"];
     __block IOBluetoothDevice* rtv;
     [devices enumerateObjectsUsingBlock:^(IOBluetoothDevice* obj, NSUInteger idx, BOOL * _Nonnull stop) {
@@ -235,11 +247,11 @@
             NSURL* sync_dir = [NSUserDefaults.standardUserDefaults URLForKey:@"sync_dir"];
             NSURL* private_key = [NSUserDefaults.standardUserDefaults URLForKey:@"private_key"];
             NSURL* device_id = [NSUserDefaults.standardUserDefaults URLForKey:@"device_id"];
-            [sync_dir withSecured:^(NSURL * _Nonnull url) {
-                [private_key withSecured:^(NSURL * _Nonnull url) {
-                    [device_id withSecured:^(NSURL * _Nonnull url) {
+            [sync_dir withSecured:^(NSURL * _Nonnull _) {
+                [private_key withSecured:^(NSURL * _Nonnull __) {
+                    [device_id withSecured:^(NSURL * _Nonnull ___) {
                         [self authenticateDPT];
-                        self.m_dpt->safeSyncAllFiles();
+                        self.dpt->safeSyncAllFiles();
                     }];
                 }];
             }];

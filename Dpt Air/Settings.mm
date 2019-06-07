@@ -18,10 +18,22 @@
 
 @implementation Settings
 
-- (void)viewDidLoad
+
+- (void)viewWillAppear
 {
-    [self findBluetoothDevices];
+    [super viewWillAppear];
+    [self refreshBluetoothDevices];
+    [self refreshRollbackHistory];
     [self.bluetoothTable.enclosingScrollView setHorizontalScrollElasticity:NSScrollElasticityNone];
+    [self.rollbackTable.enclosingScrollView setHorizontalScrollElasticity:NSScrollElasticityNone];
+}
+
+- (void)viewWillDisappear
+{
+    [super viewWillDisappear];
+    /* Without this, the UI locks for a long time when window exits.
+        The reason is unclear. Maybe cocoa needs to do some clean up */
+    [self.rollbackHistory setContent:nil];
 }
 
 - (IBAction)onSelectSyncFolderButtonClicked:(id)sender
@@ -31,10 +43,44 @@
     op.canChooseDirectories = YES;
     op.canCreateDirectories = YES;
     [op runModal];
-    NSURL* url = [op.URLs firstObject];
-    [url withSecured:^(NSURL * _Nonnull url) {
-        [NSUserDefaults.standardUserDefaults setURL:url forKey:@"sync_dir"];
+    [[op.URLs firstObject] withSecured:^(NSURL * _Nonnull safeurl) {
+        [NSUserDefaults.standardUserDefaults setURL:safeurl forKey:@"sync_dir"];
     }];
+}
+
+- (void)refreshRollbackHistory
+{
+    NSURL* sync_dir = NSApp.appDelegate.unsafe_sync_dir;
+    if (! sync_dir) {
+        return;
+    }
+    /* set git path */
+    NSString* gitpath = [NSBundle.mainBundle pathForResource:@"git" ofType:nil];
+    NSApp.appDelegate.dpt->setGitPath(std::string(gitpath.UTF8String));
+    /* set sync dir */
+    NSApp.appDelegate.dpt->setSyncDir(std::string(sync_dir.path.UTF8String));
+    
+    [self.rollbackHistory setContent:nil];
+    
+    [sync_dir withSecured:^(NSURL * _Nonnull _) {
+        NSApp.appDelegate.dpt->updateGitCommits();
+    }];
+    NSISO8601DateFormatter* iso8601_dateFormatter = [[NSISO8601DateFormatter alloc] init];
+    NSDateFormatter* dateFormatter = [[NSDateFormatter alloc] init];
+    dateFormatter.dateStyle = NSDateFormatterMediumStyle;
+    dateFormatter.timeStyle = NSDateFormatterMediumStyle;
+    dateFormatter.locale = NSLocale.currentLocale;
+    NSMutableArray<NSDictionary*>* buffer = [NSMutableArray array];
+    for (auto const& gc : NSApp.appDelegate.dpt->listGitCommits(100))
+    {
+        NSString* iso8601_date = [NSString stringWithUTF8String:gc->iso8601_time.c_str()];
+        NSDate* date = [iso8601_dateFormatter dateFromString:iso8601_date];
+        NSString* time = [dateFormatter stringFromDate:date];
+        NSString* commit = [NSString stringWithUTF8String:gc->commit.c_str()];
+        NSString* title = [NSString stringWithUTF8String:gc->title.c_str()];
+        [buffer addObject:@{@"commit":commit, @"time": time, @"title": title, @"buttonTarget": self}];
+    }
+    [self.rollbackHistory setContent:buffer];
 }
 
 - (IBAction)onSelectDigitalPaperAppPath:(id)sender
@@ -44,8 +90,7 @@
     op.canChooseDirectories = NO;
     op.canCreateDirectories = NO;
     [op runModal];
-    NSURL* url = [op.URLs firstObject];
-    [url withSecured:^(NSURL * _Nonnull url) {
+    [[op.URLs firstObject] withSecured:^(NSURL * _Nonnull url) {
         [NSUserDefaults.standardUserDefaults setURL:url forKey:@"sony_dpa_launcher"];
     }];
 }
@@ -57,8 +102,7 @@
     op.canChooseDirectories = NO;
     op.canCreateDirectories = NO;
     [op runModal];
-    NSURL* url = [op.URLs firstObject];
-    [url withSecured:^(NSURL * _Nonnull url) {
+    [[op.URLs firstObject] withSecured:^(NSURL * _Nonnull url) {
         [NSUserDefaults.standardUserDefaults setURL:url forKey:@"private_key"];
     }];
 }
@@ -71,15 +115,16 @@
     op.canCreateDirectories = NO;
     [op runModal];
     NSURL* url = [op.URLs firstObject];
-    [url withSecured:^(NSURL * _Nonnull url) {
-        [NSUserDefaults.standardUserDefaults setURL:url forKey:@"device_id"];
+    [url withSecured:^(NSURL * _Nonnull safe) {
+        [NSUserDefaults.standardUserDefaults setURL:safe forKey:@"device_id"];
     }];
 }
 
-- (void)findBluetoothDevices
+- (void)refreshBluetoothDevices
 {
-    NSArray* devices = IOBluetoothDevice.favoriteDevices;
+    NSArray* devices = IOBluetoothDevice.pairedDevices;
     NSString* bluetooth_device = [NSUserDefaults.standardUserDefaults stringForKey:@"bluetooth_device"];
+    [self.bluetoothDevices setContent:nil];
     [devices enumerateObjectsUsingBlock:^(IOBluetoothDevice* obj, NSUInteger idx, BOOL * _Nonnull stop) {
         NSString* buttonEnabled;
         NSString* buttonTitle;
@@ -103,9 +148,35 @@
 - (void)handleBluetoothSelectButtonClicked:(NSMutableDictionary*)deviceObject
 {
     [NSUserDefaults.standardUserDefaults setValue:deviceObject[@"name"] forKey:@"bluetooth_device"];
-    deviceObject[@"buttonTitle"] = @"In Use";
-    deviceObject[@"buttonEnabled"] = nil;
+    [self refreshBluetoothDevices];
 }
 
+- (IBAction)showSenderToolTip:(id)sender
+{
+    NSHelpManager *helpManager = [NSHelpManager sharedHelpManager];
+    [helpManager setContextHelp:[[NSAttributedString alloc] initWithString:[sender toolTip]] forObject:sender];
+    [helpManager showContextHelpForObject:sender locationHint:[NSEvent mouseLocation]];
+    [helpManager removeContextHelpForObject:sender];
+}
+
+- (IBAction)onExtractButtonClicked:(NSDictionary*)obj
+{
+    NSString* commit = obj[@"commit"];
+    NSSavePanel *op = [NSSavePanel savePanel];
+//    op.title = @"Select a Directory t the Checkpoint"
+    op.canCreateDirectories = YES;
+    op.canSelectHiddenExtension = YES;
+    [op beginSheetModalForWindow:self.view.window completionHandler:^(NSModalResponse result) {
+        if (result == NSModalResponseOK) {
+            [NSFileManager.defaultManager createDirectoryAtURL:op.URL withIntermediateDirectories:NO attributes:nil error:nil];
+            dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+                [NSApp.appDelegate.unsafe_sync_dir withSecured:^(NSURL * _Nonnull _) {
+                    NSApp.appDelegate.dpt->extractGitCommit(std::string(commit.UTF8String), std::string(op.URL.path.UTF8String));
+                }];
+                [NSWorkspace.sharedWorkspace performSelectorOnMainThread:@selector(openURL:) withObject:op.URL waitUntilDone:YES];
+            });
+        }
+    }];
+}
 
 @end
