@@ -50,15 +50,19 @@
     [self autoDetectSettings];
 //    [NSUserDefaults.standardUserDefaults addSuiteNamed:@"group.com.dpt-air"];
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0), ^{
+        NSInteger current_minute = 0;
         while(true) {
             NSInteger enabled = [NSUserDefaults.standardUserDefaults integerForKey:@"enable_scheduled_sync"];
             if (enabled) {
-                [self performSelectorOnMainThread:@selector(syncAll:) withObject:self waitUntilDone:YES];
-                NSInteger mins = [NSUserDefaults.standardUserDefaults integerForKey:@"scheduled_sync_interval"];
-                [NSThread sleepForTimeInterval:MAX(mins*60, 60)];
-            } else {
-                [NSThread sleepForTimeInterval:60];
+                current_minute++;
+                NSInteger max_minutes = [NSUserDefaults.standardUserDefaults integerForKey:@"scheduled_sync_interval"];
+                max_minutes = MAX(max_minutes, 1); /* support minimum of 1 minutes */
+                if (current_minute >= max_minutes) {
+                    current_minute = 0;
+                    [self performSelectorOnMainThread:@selector(syncAll:) withObject:self waitUntilDone:YES];
+                }
             }
+            [NSThread sleepForTimeInterval:60];
         }
     });
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0), ^{
