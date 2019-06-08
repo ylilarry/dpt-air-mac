@@ -65,8 +65,13 @@
         NSUserDefaults* shared_defaults = [[NSUserDefaults alloc] initWithSuiteName:@"group.com.dpt-air"];
         while(true) {
             NSArray<NSString*>* arr = [shared_defaults objectForKey:@"to_open"];
-            [arr enumerateObjectsUsingBlock:^(NSString * _Nonnull s, NSUInteger idx, BOOL * _Nonnull stop) {
-                NSURL* url = [NSURL URLWithString:s];
+            if (arr.count > 0) {
+                IOBluetoothDevice* device = [self autoConnectBluetooth];
+                self.message = @"Waiting for Bluetooth Connection...";
+                while (! device.isConnected) {
+                    [NSThread sleepForTimeInterval:1];
+                }
+                NSURL* url = [NSURL URLWithString:arr.firstObject];
                 self.message = [NSString stringWithFormat:@"Sending %@ to DPT-RP1...", url.lastPathComponent];
                 [self.statusItem performSelectorOnMainThread:@selector(popUpStatusItemMenu:) withObject:self.statusItemMenu waitUntilDone:NO];
                 [self.dpt_lock lock];
@@ -91,7 +96,7 @@
                 }
                 [self.dpt_lock unlock];
                 NSLog(@"%@", url);
-            }];
+            }
             [shared_defaults setObject:[NSArray array] forKey:@"to_open"];
             [NSThread sleepForTimeInterval:1];
         }
@@ -256,7 +261,6 @@
         }
         
         [self.dpt_lock lock];
-
         [self startCheckingDptBusyStatus];
         
         try {
