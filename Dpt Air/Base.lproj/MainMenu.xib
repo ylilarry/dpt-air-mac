@@ -88,6 +88,23 @@
                     </connections>
                 </menuItem>
                 <menuItem isSeparatorItem="YES" id="Sg6-Sn-TEk"/>
+                <menuItem title="About" id="ay5-Iu-z5j">
+                    <modifierMask key="keyEquivalentModifierMask"/>
+                    <menu key="submenu" title="About" id="kQI-4t-sRo">
+                        <items>
+                            <menuItem title="Privacy Statement" id="qmb-Dr-W5A">
+                                <modifierMask key="keyEquivalentModifierMask"/>
+                            </menuItem>
+                            <menuItem title="Software Licence" id="yo7-E8-NlY">
+                                <modifierMask key="keyEquivalentModifierMask"/>
+                            </menuItem>
+                            <menuItem isSeparatorItem="YES" id="8sK-J6-HhZ"/>
+                            <menuItem title="Report an Issue" id="XGk-HT-tEH">
+                                <modifierMask key="keyEquivalentModifierMask"/>
+                            </menuItem>
+                        </items>
+                    </menu>
+                </menuItem>
                 <menuItem title="Preference..." keyEquivalent="," id="nFG-SZ-KwX">
                     <connections>
                         <action selector="displaySettingsWindow:" target="Voe-Tx-rLC" id="3p8-JM-Jtk"/>
